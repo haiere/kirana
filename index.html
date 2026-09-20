@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Kirana — Chatbot AI Starter</title>
+<meta name="description" content="Template chatbot AI: HTML/CSS/JS murni, streaming, siap deploy ke Cloudflare Pages." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M6 9h20v14H14l-6 5v-5H6z' fill='none' stroke='%2314b8a6' stroke-width='2.5' stroke-linejoin='round'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <svg class="logo" viewBox="0 0 32 32" aria-label="Kirana" role="img" fill="none">
+      <path d="M6 9h20v14H14l-6 5v-5H6z" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
+      <circle cx="13" cy="16" r="1.6" fill="currentColor"/>
+      <circle cx="19" cy="16" r="1.6" fill="currentColor"/>
+    </svg>
+    <div class="brand-text">
+      <span class="brand-name">Kirana</span>
+      <span class="brand-sub">chatbot starter</span>
+    </div>
+  </div>
+  <div class="topbar-actions">
+    <button id="settingsBtn" class="btn btn-ghost" type="button" aria-expanded="false">Pengaturan</button>
+    <button id="themeBtn" class="btn btn-icon" type="button" aria-label="Ganti tema">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.5"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5 5l1.5 1.5M17.5 17.5L19 19M19 5l-1.5 1.5M6.5 17.5L5 19"/></svg>
+    </button>
+  </div>
+</header>
+
+<section id="settings" class="settings" hidden>
+  <div class="settings-grid">
+    <label class="field">
+      <span class="field-label">API key <span class="hint">hanya di sesi ini</span></span>
+      <input id="apiKey" type="password" placeholder="gsk_..." autocomplete="off" spellcheck="false" />
+    </label>
+    <label class="field">
+      <span class="field-label">Model</span>
+      <select id="model">
+        <option value="llama-3.3-70b-versatile">llama-3.3-70b-versatile</option>
+        <option value="llama-3.1-8b-instant">llama-3.1-8b-instant (cepat)</option>
+        <option value="openai/gpt-oss-120b">openai/gpt-oss-120b</option>
+        <option value="qwen/qwen3.8-27b">qwen/qwen3.8-27b</option>
+      </select>
+    </label>
+    <label class="field field-wide">
+      <span class="field-label">System prompt <span class="hint">kepribadian bot</span></span>
+      <textarea id="systemPrompt" rows="2">Kamu Kirana, asisten AI berbahasa Indonesia. Jawab singkat, jelas, dan langsung ke inti.</textarea>
+    </label>
+  </div>
+  <p class="settings-note">
+    Mode ini memanggil API langsung dari browser — cukup untuk uji coba pribadi.
+    Untuk produksi, pakai proxy <code>functions/api/chat.js</code> supaya key tidak bocor.
+  </p>
+</section>
+
+<main id="chat" class="chat" aria-live="polite">
+  <div class="empty" id="empty">
+    <h1 class="empty-title">Mulai ngobrol</h1>
+    <p class="empty-sub">Masukkan API key di Pengaturan, lalu kirim pesan. Riwayat hanya tersimpan di sesi ini.</p>
+    <div class="chips">
+      <button class="chip" type="button">Jelaskan async/await ke pemula</button>
+      <button class="chip" type="button">Bikin regex validasi email</button>
+      <button class="chip" type="button">Ide nama untuk app cuaca</button>
+    </div>
+  </div>
+</main>
+
+<footer class="composer-wrap">
+  <form id="composer" class="composer">
+    <textarea id="input" rows="1" placeholder="Tulis pesan… (Enter kirim, Shift+Enter baris baru)" autocomplete="off"></textarea>
+    <button id="send" class="btn btn-send" type="submit" aria-label="Kirim">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l16-8-6 8 6 8z"/></svg>
+    </button>
+  </form>
+  <div class="composer-meta">
+    <span id="status" class="status">Siap</span>
+    <button id="clear" class="btn btn-ghost btn-xs" type="button">Hapus riwayat</button>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
